@@ -368,6 +368,17 @@ class MediaOrganizer(QWidget):
         self.worker.done.connect(self.show_summary)
         self.worker.start()
 
+    def show_summary(self, stats):
+        summary = (
+            f"\n--- Organizing Complete ---\n"
+            f"Total files: {stats.get('total', 0)}\n"
+            f"Copied: {stats.get('copied', 0)}\n"
+            f"Skipped: {stats.get('skipped', 0)}\n"
+            f"Errors: {stats.get('errors', 0)}\n"
+            f"Uncategorized: {stats.get('uncategorized', 0)}\n"
+        )
+        self.log(summary)
+
 if __name__ == '__main__':
     import sys
     from PySide6.QtWidgets import QMessageBox
